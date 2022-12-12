@@ -1,5 +1,7 @@
 package jpabook.jpashop.domain;
 
+import org.hibernate.annotations.OnDelete;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -25,6 +27,10 @@ public class Order {
     //순서가 꼬이면 안돼니 꼭 EnumType.STRING 사용
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
+
+    @OneToOne
+    @JoinColumn(name = "DELIVERY_ID")
+    private Delivery delivery;
 
     public void addOrderItem(OrderItem orderItem) {
         orderItems.add(orderItem);
